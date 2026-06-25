@@ -9,7 +9,7 @@ dnf config-manager --set-enabled powertools 2>/dev/null \
 dnf install -y epel-release 2>/dev/null || true
 
 dnf install -y \
-  gcc gcc-c++ make git which \
+  gcc gcc-c++ make git which curl patchelf \
   qt5-qtbase-devel qt5-qtsvg-devel qt5-qttools-devel \
   zlib-devel libpng-devel libcurl-devel expat-devel \
   libX11-devel libxcb-devel mesa-libGL-devel

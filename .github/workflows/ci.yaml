@@ -30,17 +30,37 @@ jobs:
       - name: Install dependencies
         run: bash KLayout-coredb/scripts/ci-rocky8-deps.sh
 
+      - name: Cache Cap'n Proto (Linux)
+        uses: actions/cache@v4
+        with:
+          path: CommonDB/third_party/capnp-install-linux
+          key: capnp-linux-rocky8-v1-${{ hashFiles('CommonDB/scripts/build_capnp_linux.sh') }}
+          restore-keys: |
+            capnp-linux-rocky8-v1-
+
+      - name: Bootstrap Cap'n Proto
+        env:
+          COMMONDB_ROOT: ${{ github.workspace }}/CommonDB
+        run: |
+          sed -i 's/\r$//' "$COMMONDB_ROOT/scripts/build_capnp_linux.sh"
+          CAPNP_SKIP_CHECK=1 bash "$COMMONDB_ROOT/scripts/build_capnp_linux.sh" \
+            "https://github.com/capnproto/capnproto.git" branch master "" "" \
+            "$COMMONDB_ROOT/third_party/capnproto-linux" \
+            "$COMMONDB_ROOT/third_party/capnp-install-linux"
+          ln -sfn capnp-install-linux "$COMMONDB_ROOT/third_party/capnp-install"
+
       - name: Link mcore streamer
         env:
           COMMONDB_ROOT: ${{ github.workspace }}/CommonDB
         run: |
           sed -i 's/\r$//' KLayout-coredb/scripts/*.sh KLayout-coredb/klayout-src/build.sh
+          chmod +x KLayout-coredb/klayout-src/build.sh KLayout-coredb/klayout-src/version.sh
           bash KLayout-coredb/scripts/setup_klayout_mcore.sh KLayout-coredb/klayout-src
 
       - name: Build KLayout
         working-directory: KLayout-coredb/klayout-src
         run: |
-          ./build.sh -build build-release -bin bin-release -noruby -nopython -option "-j$(nproc)"
+          bash build.sh -build build-release -bin bin-release -noruby -nopython -option "-j$(nproc)"
 
       - name: Verify binaries
         run: |
@@ -61,10 +81,21 @@ jobs:
           fi
           "$KLAYOUT" -b -r "${{ github.workspace }}/KLayout-coredb/scripts/test_core_load.rb"
 
-      - name: Upload klayout binary
+      - name: Install linuxdeployqt
+        run: bash KLayout-coredb/scripts/ci_install_linuxdeployqt.sh
+
+      - name: Package portable bundle
+        env:
+          CAPNP_ROOT: ${{ github.workspace }}/CommonDB/third_party/capnp-install-linux
+        run: |
+          sed -i 's/\r$//' KLayout-coredb/scripts/package_klayout_linux_bundle.sh
+          bash KLayout-coredb/scripts/package_klayout_linux_bundle.sh \
+            KLayout-coredb/klayout-src/bin-release \
+            KLayout-coredb/klayout-rocky8-bundle.tar.gz \
+            "Rocky Linux 8"
+
+      - name: Upload klayout bundle
         uses: actions/upload-artifact@v4
         with:
           name: klayout-rocky8
-          path: |
-            KLayout-coredb/klayout-src/bin-release/klayout
-            KLayout-coredb/klayout-src/build-release/db_plugins/mcore.so
+          path: KLayout-coredb/klayout-rocky8-bundle.tar.gz
