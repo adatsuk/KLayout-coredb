@@ -12,6 +12,7 @@ dnf install -y \
   gcc gcc-c++ make git which curl patchelf \
   autoconf automake libtool \
   qt5-qtbase-devel qt5-qtsvg-devel qt5-qttools-devel \
+  qt5-qtmultimedia-devel qt5-qtxmlpatterns-devel \
   zlib-devel libpng-devel libcurl-devel expat-devel \
   libX11-devel libxcb-devel mesa-libGL-devel
 
