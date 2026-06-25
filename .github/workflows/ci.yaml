@@ -35,7 +35,7 @@ jobs:
           COMMONDB_ROOT: ${{ github.workspace }}/CommonDB
         run: |
           sed -i 's/\r$//' KLayout-coredb/scripts/*.sh KLayout-coredb/klayout-src/build.sh
-          bash KLayout-coredb/scripts/setup_klayout_mcore.sh "${{ github.workspace }}/KLayout-coredb/klayout-src"
+          bash KLayout-coredb/scripts/setup_klayout_mcore.sh KLayout-coredb/klayout-src
 
       - name: Build KLayout
         working-directory: KLayout-coredb/klayout-src

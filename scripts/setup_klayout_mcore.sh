@@ -4,6 +4,9 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 KLAYOUT="${1:-$ROOT/klayout-src}"
+if [[ "$KLAYOUT" != /* ]]; then
+  KLAYOUT="$(cd "$(dirname "$KLAYOUT")" && pwd)/$(basename "$KLAYOUT")"
+fi
 
 if [[ -n "${COMMONDB_ROOT:-}" ]]; then
   COMMONDB="$(cd "$COMMONDB_ROOT" && pwd)"
