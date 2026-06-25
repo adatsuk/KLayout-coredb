@@ -49,6 +49,14 @@ jobs:
             "$COMMONDB_ROOT/third_party/capnp-install-linux"
           ln -sfn capnp-install-linux "$COMMONDB_ROOT/third_party/capnp-install"
 
+      - name: Regenerate KLayout capnp sources
+        env:
+          COMMONDB_ROOT: ${{ github.workspace }}/CommonDB
+          CAPNP_ROOT: ${{ github.workspace }}/CommonDB/third_party/capnp-install-linux
+        run: |
+          sed -i 's/\r$//' KLayout-coredb/scripts/regenerate_klayout_capnp.sh
+          bash KLayout-coredb/scripts/regenerate_klayout_capnp.sh
+
       - name: Link mcore streamer
         env:
           COMMONDB_ROOT: ${{ github.workspace }}/CommonDB

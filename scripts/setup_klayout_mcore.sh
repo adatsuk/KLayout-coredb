@@ -47,3 +47,5 @@ fi
 echo "Linked $LINK -> $MCORE"
 echo "COMMONDB_ROOT=$COMMONDB"
 echo "KLAYOUT_SRC=$KLAYOUT/src"
+
+bash "$(dirname "$0")/regenerate_klayout_capnp.sh"
