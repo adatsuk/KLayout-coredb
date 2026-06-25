@@ -60,7 +60,7 @@ jobs:
       - name: Build KLayout
         working-directory: KLayout-coredb/klayout-src
         run: |
-          bash build.sh -build build-release -bin bin-release -noruby -nopython -option "-j$(nproc)"
+          bash build.sh -build build-release -bin bin-release -noruby -nopython -nolibgit2 -option "-j$(nproc)"
 
       - name: Verify binaries
         run: |
