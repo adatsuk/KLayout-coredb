@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "klayout_doc.dtd">
+
+<doc>
+
+  <title>Creating A Polygon</title>
+  <keyword name="Drawing"/>
+  <keyword name="Polygon"/>
+
+  <p>
+  Select "Polygon" mode from the toolbar. 
+  Choose a layer from the layer panel in which to create a new polygon. 
+  Left-click at the first vertex of the polygon. Move the mouse to the next vertex and place a new one 
+  with a left mouse button click. Move to the next vertex. Depending on the connection mode, the edges
+  created are confined to certain directions. See <link href="/manual/editor_options.xml"/>
+  for a detailed description of the modes. Use the "editor options" dialog (F3 shortcut) to change the mode, 
+  even during editing. 
+  </p>
+
+  <p>
+  To temporarily constrain the segment direction, press the Shift or Ctrl key or both while dragging
+  the segment. Shift will apply Manhattan 
+  constraints (vertical and horizontal only), Ctrl will allow diagonal directions in addition and 
+  pressing Shift+Ctrl will allow all directions.
+  </p>
+
+  <p>
+  Double-click at the final point or press the Enter key to finish the polygon. 
+  Press the Escape key to cancel the operation. Use the Backspace key to delete the
+  last segment.
+  </p>
+
+  <p>
+  While you drag a polygon segment, two edit boxes are shown at the top of the layout view.
+  Press the Tab key to enter these edit boxes.
+  Use the Tab and Shift+Tab keys to navigate between the boxes.
+  You can specify a numerical values for the segment vector here. Pressing the Enter key will apply these
+  relative coordinates and enter a new segment. Pressing the Escape key will leave the edit fields.
+  </p>
+
+  <p>
+  A polygon will never be "open": there are always edges connecting the current vertex with the initial one. 
+  Depending on the mode, this final connection is either a straight line or a combination of edges. In "diagonal mode", there
+  are manifold possibilities to create a final connection in a more or less smart way. The program uses
+  some heuristics to determine one feasible combination. Although this heuristics is not infinite smart, 
+  it should be easy to lead the algorithm to the desired solution, by pointing the mouse into the desired
+  direction.
+  </p>
+
+</doc>
+

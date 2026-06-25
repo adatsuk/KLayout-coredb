@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "klayout_doc.dtd">
+
+<doc>
+
+  <title>Doing Measurements</title>
+  <keyword name="Rulers"/>
+  <keyword name="Measure"/>
+
+  <p>
+  A measurement can be performed by clicking on the ruler icon in the 
+  toolbar and selecting "Ruler" from the drop-down options.
+  Left-click on a point in the layout and then left-click again
+  or press the Enter key to set the second point. 
+  A ruler will be shown that indicates the distance measured. 
+  </p>
+
+  <p>
+  While you move the endpoint, you can hold the Shift or Ctrl key
+  or both. With only the Shift key pressed, the ruler's direction 
+  will be limited to horizontal or vertical only. With only the Ctrl
+  key pressed, the direction is limited to horizontal, vertical or
+  diagonal. With Ctrl and Shift pressed together, no limitation
+  of direction applies.
+  </p>
+
+  <p>
+  While the ruler is dragged, the current drag distance is indicated
+  in three edit fields at the top of the layout view. By pressing the
+  Tab key, the input focus changes to these edit fields. You can 
+  specify a numerical value for the distances here. Use Tab and
+  Shift+Tab to jump between the fields. Press the Escape key to
+  leave the edit fields. Pressing the Enter key while
+  the cursor is on the "dx" or "dy" field will
+  accept the values and apply them to the ruler.
+  If you specify a value in the last field labelled "d" and press
+  Enter, the ruler will enter "fixed length" mode - in that mode you
+  can still define the ruler's direction with the mouse, but the 
+  length is fixed to the given value.
+  </p>
+
+  <p>
+  A convenient way to measure a distance is the single-click measurement
+  ruler. Select "Measure" from the drop-down options of the ruler symbol.
+  In this mode, a single click will set a ruler to the specified 
+  position. This feature will look for edges in the vicinity of the 
+  ruler and set the ruler to connect the neighboring edges. The ruler
+  is attached perpendicular to the edge next to the initial point.
+  </p>
+
+  <p>
+  The "Measure Edge" ruler type is also a single-click measurement
+  ruler, but measures the length of an edge at the click position.
+  </p>
+
+  <p>
+  You can mark a position with a single click by selecting the "Cross"
+  ruler type. Clicking at a location will place such a ruler. The ruler
+  shows the x and y coordinate.
+  </p>
+
+  <p>
+  The "Multi-Ruler" allows concatenating multiple rulers into a single
+  object. Click and the first point to start such a ruler. Then click
+  on more points to add new segments to the ruler. Each segment is shown
+  as an individual ruler with tick marks and a length. Finish the sequence
+  with a double-click or by pressing the Enter key.
+  Note that the lengths indicated by the ruler labels are the lengths
+  of the individual segments. To get an incremental length (the sum
+  of all segment length), change the ruler's label format from "$D" to "$DD" ("DD"
+  is variable giving the incremental length).
+  See the description of ruler templates below, about how to make this change permanent.
+  </p>
+
+  <p>
+  The "Angle" ruler allows angle measurements. Three clicks are required
+  to define a "V" like arrangement of two rulers. The angle enclosed by the two lines forming the "V"
+  is shown in the ruler.
+  </p>
+
+  <p>
+  Another special ruler, the "Radius" ruler is also a three-click type.
+  Specify three points to define a circle. The ruler shows the radius
+  of this circle and the circle outline.
+  </p>
+
+  <p>
+  Rulers can be configured in manifold ways. Use "Rulers And Annotations Setup" 
+  in the "Edit" menu to open the ruler configuration dialog. 
+  A ruler can be
+  made to snap to edges of objects by selecting "Snap to edge/vertex".
+  Ruler orientations can be constrained by using the "Angle Constraint"
+  options. The number of rulers can be limited using the "Limit 
+  number of annotations" setting.
+  </p>
+
+  <p>
+  While drawing or moving one point of a ruler, the direction constraint
+  can be overridden with the Shift and Ctrl keys: pressing Shift while moving the
+  mouse will enforce orthogonal constraint, Ctrl will enforce diagonal constraint 
+  while pressing both will release any direction constraint.
+  </p>
+
+  <p>
+  All rulers can be cleared using the "Clear all rulers" function from the
+  "Edit" menu.
+  </p>
+
+  <p>
+  Ruler dragging can be canceled with the "Esc" key or using the "Cancel"
+  function from the "Edit" menu.
+  </p>
+
+  <p>
+  Rulers can be moved by selecting "Move" mode with the speedbar buttons
+  in the toolbar or "Move" from the "Mode" sub-menu in the "Edit" menu. Then
+  left-click and drag the ruler or the ruler end point that should be changed.
+  </p>
+
+  <p>
+  Rulers can be deleted selectively by selecting a ruler in "Select" mode and
+  pressing "Delete".
+  </p>
+
+  <p> 
+  Rulers can be modified in a variety of ways. For example, rulers can be shown
+  as arrows. To edit the properties of a ruler, double-click the ruler or 
+  select it and use "Properties" from the "Edit" menu. 
+  See <link href="/manual/ruler_properties.xml"/> for a description of the 
+  properties.
+  </p>
+
+  <p> 
+  Multiple templates can be configured to be available for rulers. Each template defined
+  will be shown in the "Ruler" mode toolbar button's drop-down menu.
+  If a template is selected, new rulers produced from this template will inherit
+  the template's properties. Templates are managed in the 
+  ruler setup page ("Setup" from the "File" menu) or "Ruler And Annotation Setup" from the "Edit" menu.
+  </p>
+
+</doc>
+
