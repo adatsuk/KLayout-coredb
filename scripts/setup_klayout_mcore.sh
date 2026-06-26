@@ -38,8 +38,11 @@ COMMONDB_ROOT = $COMMONDB
 KLAYOUT_SRC = $KLAYOUT/src
 EOF
 
-# Ensure streamers.pro includes mcore (idempotent).
+# Ensure streamers.pro lists mcore once (auto-discovery + explicit SUBDIRS duplicates it).
 STREAMERS_PRO="$STREAMERS/streamers.pro"
+if ! grep -q 'SUBDIR_LIST -= \$\$PWD/mcore' "$STREAMERS_PRO" 2>/dev/null; then
+  sed -i '/SUBDIR_LIST -= \$\$PWD\/streamers.pro/a SUBDIR_LIST -= $$PWD/mcore' "$STREAMERS_PRO"
+fi
 if ! grep -q 'SUBDIRS += mcore' "$STREAMERS_PRO" 2>/dev/null; then
   printf '\n# CommonDB CORE streamer\nSUBDIRS += mcore\n' >> "$STREAMERS_PRO"
 fi
